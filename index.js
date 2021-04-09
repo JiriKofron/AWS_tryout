@@ -11,33 +11,23 @@ const app = new Vue({
       let email = this.email;
       let message = this.message;
       const endPoint =
-        'https://wsd9s169el.execute-api.us-east-2.amazonaws.com/First/sendForm/';
+        'https://4diw5umm89.execute-api.us-east-2.amazonaws.com/sendForm';
       console.log(name, email, message);
-
-      axios({
-        method: 'post',
-        url: endPoint,
-        data: {
-          senderName: name,
-          senderEmail: email,
-          message: message,
-        },
-        statusText: 'OK',
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      }).then(
-        (response) => {
-          console.log('odeslo');
+      const data = {
+        senderName: name,
+        senderEmail: email,
+        message: message,
+      };
+      console.log(data);
+      axios
+        .post(endPoint, data)
+        .then((response) => {
+          console.log(response);
           console.log(response.data);
-        },
-        (error) => {
+        })
+        .catch((error) => {
           console.log(error);
-        }
-      );
+        });
     },
   },
 });
